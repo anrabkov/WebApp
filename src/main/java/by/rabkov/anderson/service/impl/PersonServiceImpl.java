@@ -1,6 +1,7 @@
 package by.rabkov.anderson.service.impl;
 
 import by.rabkov.anderson.dao.PersonDao;
+import by.rabkov.anderson.dao.impl.PersonDaoImpl;
 import by.rabkov.anderson.entity.Person;
 import by.rabkov.anderson.service.PersonService;
 
@@ -10,10 +11,9 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
     private PersonDao personDao;
 
-    public PersonServiceImpl(PersonDao personDao) {
-        this.personDao = personDao;
+    public PersonServiceImpl() {
+        personDao = new PersonDaoImpl();
     }
-
     @Override
     public Person findPersonById(int id) throws SQLException {
        return personDao.findPersonById(id);
@@ -38,5 +38,12 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void deletePersonById(int id) throws SQLException {
         personDao.deletePersonById(id);
+    }
+    public PersonDao getPersonDao() {
+        return personDao;
+    }
+
+    public void setPersonDao(PersonDao personDao) {
+        this.personDao = personDao;
     }
 }
